@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Users from "./components/Users";
+import AddForm from "./components/AddForm";
+import { connect } from "react-redux";
+import * as actions from "./actions/index";
+import "./App.css";
+class App extends Component {
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    onToggleForm = () => {
+        this.props.onToggleForm();
+    }
+
+    render() {
+        const isDisplayForm = this.props.isDisplayForm;
+        const elementForm = isDisplayForm && <AddForm />
+
+        return (
+            <div className="container">
+                <div className="text-center">
+                    <h1>List</h1>
+                    <hr />
+                </div>
+                <div className="row">
+                    <div className={
+                        isDisplayForm && "col-xs-4 col-sm-4 col-md-4 col-lg-4"
+                    }>
+                        {elementForm}
+                    </div>
+                    <div className={
+                        isDisplayForm === true ?
+                            "col-xs-8 col-sm-8 col-md-8 col-lg-8" :
+                            "col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                    }>
+                        <button
+                            type="button"
+                            className="btn btn-primary mb-15"
+                            onClick={this.onToggleForm}>
+                            {isDisplayForm ? "Close Form" : "Add Form"}
+                        </button>
+                        <Users />
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
-
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        isDisplayForm: state.isDisplayForm
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onToggleForm: () => {
+            dispatch(actions.isToogleForm());
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App);
