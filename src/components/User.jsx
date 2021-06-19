@@ -3,19 +3,21 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/index';
 
 class User extends Component {
-    
+
     onDeleteUser = () => {
-        const {user} = this.props;
-        this.props.onDeleteUser(user.id);
+        const resulf = window.confirm('Want to delete');
+        if (resulf) {
+            const { user } = this.props;
+            this.props.onDeleteUser(user.id);
+        }
     }
 
     onEditUser = () => {
-        const {user} = this.props;
+        const { user } = this.props;
         this.props.onEditUser(user);
     }
 
     render() {
-        
         const { user, index } = this.props;
         return (
             <tr>
@@ -47,7 +49,7 @@ class User extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         onDeleteUser: (id) => {
-            dispatch(actions.deleteUser(id))
+            actions.deleteUserRequest(id, dispatch);
         },
 
         onEditUser: (user) => {
@@ -57,4 +59,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null,mapDispatchToProps)(User);
+export default connect(null, mapDispatchToProps)(User);

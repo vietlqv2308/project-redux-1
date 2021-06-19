@@ -3,16 +3,17 @@ import User from './User';
 import { connect } from 'react-redux';
 
 class Users extends Component {
-
     render() {
         const users = this.props.users;
 
         const elementUser = users.map((user, index,) => {
-            return <User
-                key={user.id}
-                user={user}
-                index={index}
-            />
+            return (
+                <User
+                    key={user.id}
+                    user={user}
+                    index={index}
+                />
+            );
         });
 
         return (
@@ -27,7 +28,7 @@ class Users extends Component {
                                 <th className="text-center">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody >
                             {elementUser}
                         </tbody>
                     </table>
@@ -39,8 +40,8 @@ class Users extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.users
+        users: state.users,
     }
-}
+};
 
-export default connect(mapStateToProps, null)(Users);
+export default connect(mapStateToProps)(Users);

@@ -1,13 +1,12 @@
 import { combineReducers } from "redux";
 import isDisplayForm from './isDisplayForm';
 import isEditing from './isEditting';
-import user from './user';
+import users from './user';
 
 const myReducer = combineReducers({
-    isDisplayForm : isDisplayForm,
-    users : user,
-    isEditing: isEditing,
+    isDisplayForm,
+    users: users,
+    isEditing,
 });
 
 export default myReducer;
-

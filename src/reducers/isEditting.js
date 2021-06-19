@@ -1,12 +1,20 @@
 import * as types from '../constants/ActionTypes';
 
-const initialState = {}
+const initialState = {
+}
 
 const myReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.EDIT_USER:
-            state = action.user;
-            return state;
+            return {
+                ...action.user
+            };
+
+        case types.ON_CHANGE:
+            return {
+                ...state,
+                ...action.payload,
+            }
 
         case types.ADD_USER:
             state = {};
@@ -15,7 +23,7 @@ const myReducer = (state = initialState, action) => {
         case types.IS_TOGGLE_FORM:
             state = {};
             return state;
-            
+
         default: return state;
     }
 }

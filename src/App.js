@@ -4,10 +4,15 @@ import AddForm from "./components/AddForm";
 import { connect } from "react-redux";
 import * as actions from "./actions/index";
 import "./App.css";
+
 class App extends Component {
 
     onToggleForm = () => {
         this.props.onToggleForm();
+    }
+
+    componentDidMount() {
+        this.props.getUsersRequest();
     }
 
     render() {
@@ -22,7 +27,7 @@ class App extends Component {
                 </div>
                 <div className="row">
                     <div className={
-                        isDisplayForm && "col-xs-4 col-sm-4 col-md-4 col-lg-4"
+                        isDisplayForm ? "col-xs-4 col-sm-4 col-md-4 col-lg-4" : ""
                     }>
                         {elementForm}
                     </div>
@@ -44,16 +49,22 @@ class App extends Component {
         );
     }
 }
+
 const mapStateToProps = (state) => {
     return {
-        isDisplayForm: state.isDisplayForm
-    }
+        isDisplayForm: state.isDisplayForm,
+    };
 }
+
 const mapDispatchToProps = (dispatch) => {
     return {
         onToggleForm: () => {
             dispatch(actions.isToogleForm());
-        }
-    }
+        },
+        getUsersRequest: () => {
+            actions.getUsersRequest(dispatch);
+        },
+    };
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);

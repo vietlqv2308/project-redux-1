@@ -6,46 +6,41 @@ class AddForm extends Component {
 
     constructor(props) {
         super(props)
-
-        this.state = {
-            id: "",
-            fullName: "",
-            email: ""
-        }
-
         this.fullName = React.createRef();
         this.email = React.createRef();
     }
 
     onAddUser = (event) => {
         event.preventDefault();
-
-        const fullName = this.fullName.current.value;
-        const email = this.email.current.value;
+        const { fullName, email } = this.props.isEditing;
+        let newUser = {
+            fullName,
+            email,
+        };
 
         if (this.props.isEditing && this.props.isEditing.id) {
-            const newUser = {
+            newUser = {
                 id: this.props.isEditing.id,
-                fullName: fullName,
-                email: email
+                fullName,
+                email,
             }
-            this.props.onAddUser(newUser);
         }
-        else {
-            const newUser = {
-                fullName: fullName,
-                email: email
-            }
-            this.props.onAddUser(newUser);
-        }
+
+        this.props.onAddUser(newUser);
     }
 
     onCloseForm = () => {
         this.props.onCloseForm();
     }
 
+    onChange = (event) => {
+        this.props.onChange({
+            [event.target.name]: event.target.value
+        });
+    }
+
     render() {
-        const isEditing = this.props.isEditing;
+        const { isEditing } = this.props;
 
         return (
             <div className="panel panel-warning">
@@ -60,10 +55,8 @@ class AddForm extends Component {
                                 type="text"
                                 className="form-control"
                                 name="fullName"
-                                ref={this.fullName}
-                                required
+                                value={isEditing.fullName || ""}
                                 onChange={this.onChange}
-                                defaultValue={isEditing.fullName}
                             />
                         </div>
                         <div className="form-group">
@@ -72,10 +65,8 @@ class AddForm extends Component {
                                 type="text"
                                 className="form-control"
                                 name="email"
-                                ref={this.email}
-                                required
+                                value={isEditing.email || ""}
                                 onChange={this.onChange}
-                                defaultValue={isEditing.email}
                             />
                         </div>
                         <div className="text-center">
@@ -105,20 +96,28 @@ const mapStateToProps = (state) => {
     return {
         isDisplayForm: state.isDisplayForm,
         isEditing: state.isEditing
-    }
+    };
 }
 
-const mapDispatchToProps = (dispatch, props) => {
-return {
+const mapDispatchToProps = (dispatch) => {
+    return {
         onCloseForm: () => {
             dispatch(actions.isCloseForm());
         },
-        
+
+        onChange: (data) => {
+            dispatch(actions.onChange(data));
+        },
+
         onAddUser: (user) => {
-            dispatch(actions.addUser(user));
+            if (user.id) {
+                actions.updateUserRequest(user, dispatch);
+            } else {
+                actions.createUserRequest(user, dispatch);
+            }
             dispatch(actions.isCloseForm());
         }
-    }
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddForm);

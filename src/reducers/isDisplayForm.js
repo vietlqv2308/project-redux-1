@@ -3,7 +3,6 @@ import * as types from '../constants/ActionTypes';
 const initialState = false;
 
 const myReducer = (state = initialState, action) => {
-
     switch (action.type) {
         case types.IS_TOGGLE_FORM:
             state = !state;
@@ -16,10 +15,10 @@ const myReducer = (state = initialState, action) => {
         case types.IS_CLOSE_FORM:
             state = false
             return state;
-        default:
-            return state
-    }
 
+        default:
+            return state;
+    }
 }
 
 export default myReducer;
