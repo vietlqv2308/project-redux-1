@@ -6,7 +6,7 @@ const initialState = {
     dataEdit: {
         id :'',
         productName:'',
-        status: false   
+        status: false
     },
     dataSearch:''
 }
@@ -43,7 +43,6 @@ const myReducer = (state = initialState, action) => {
             return { ...state};
 
         case types.ADD_PRODUCT:
-            console.log(action.payload);
             return {...state}
 
         default: return state

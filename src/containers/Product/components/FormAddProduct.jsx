@@ -19,7 +19,6 @@ const FormAddProduct = (props) => {
 
     const handleAddProduct = (e) => {
         actions.postRequestProduct(dispatch, dataEdit);
-        console.log(dataEdit);
         e.preventDefault();
     }
 
@@ -50,13 +49,11 @@ const FormAddProduct = (props) => {
                     >
                         <option
                             value={true}
-                            // selected={dataEdit.status === true ? "selected" : ""}
                         >
                             Enable
                         </option>
                         <option
                             value={false}
-                            // selected={dataEdit.status === false ? "selected" : ""}
                         >
                             Disable
                         </option>

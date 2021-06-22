@@ -41,7 +41,6 @@ export const getUsers = (users) => {
 };
 
 export const addUser = (user) => {
-    console.log(user)
     return ({
         type: ADD_USER,
         user: {
@@ -59,7 +58,6 @@ export const editUser = (user) => {
 };
 
 export const deleteUser = (user) => {
-    console.log(user);
     return ({
         type: DELETE_USER,
         id: user.id
