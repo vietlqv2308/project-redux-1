@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import * as actions from "../actions/index";
+import * as actions from "../actions";
 
 class AddForm extends Component {
 
@@ -17,7 +17,6 @@ class AddForm extends Component {
             fullName,
             email,
         };
-
         if (this.props.isEditing && this.props.isEditing.id) {
             newUser = {
                 id: this.props.isEditing.id,
@@ -41,7 +40,6 @@ class AddForm extends Component {
 
     render() {
         const { isEditing } = this.props;
-
         return (
             <div className="panel panel-warning">
                 <div className="panel-heading">
@@ -94,8 +92,8 @@ class AddForm extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isDisplayForm: state.isDisplayForm,
-        isEditing: state.isEditing
+        isDisplayForm: state.user.isDisplayForm,
+        isEditing: state.user.isEditing
     };
 }
 
@@ -112,8 +110,10 @@ const mapDispatchToProps = (dispatch) => {
         onAddUser: (user) => {
             if (user.id) {
                 actions.updateUserRequest(user, dispatch);
+                actions.getUsersRequest(dispatch);
             } else {
                 actions.createUserRequest(user, dispatch);
+                actions.getUsersRequest(dispatch);
             }
             dispatch(actions.isCloseForm());
         }

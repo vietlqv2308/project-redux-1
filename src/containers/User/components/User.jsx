@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import * as actions from '../actions/index';
+import * as actions from '../actions';
 
 class User extends Component {
 
     onDeleteUser = () => {
-        const resulf = window.confirm('Want to delete');
-        if (resulf) {
+        const result = window.confirm('Want to delete');
+        if (result) {
             const { user } = this.props;
             this.props.onDeleteUser(user.id);
         }

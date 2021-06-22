@@ -1,55 +1,74 @@
-import * as types from '../constants/ActionTypes';
-import * as myAxios from '../api/requests';
+import * as myAxios from './request';
 
-export const isToogleForm = () => {
+//actionTypes
+const USER = '_USER';
+
+export const IS_TOGGLE_FORM = 'IS_TOGGLE_FORM' + USER;
+export const IS_CLOSE_FORM = 'IS_CLOSE_FORM' + USER;
+export const IS_OPEN_FORM = 'IS_OPEN_FORM' + USER;
+
+export const ADD_USER = 'ADD_USER' + USER;
+export const GET_USERS = + 'GET_USERS' + USER;
+export const DELETE_USER = 'DELETE_USER' + USER;
+export const EDIT_USER = 'EDIT_USER' + USER;
+
+export const ON_CHANGE = 'ONCHANGE' + USER;
+
+//actions
+export const isToggleForm = () => {
     return ({
-        type: types.IS_TOGGLE_FORM,
+        type: IS_TOGGLE_FORM,
     });
 };
 
 export const isOpenForm = () => {
     return ({
-        type: types.IS_OPEN_FORM
+        type: IS_OPEN_FORM
     });
 };
 
 export const isCloseForm = () => {
     return ({
-        type: types.IS_CLOSE_FORM
+        type: IS_CLOSE_FORM
     });
 };
 
 export const getUsers = (users) => {
     return ({
-        type: types.GET_USERS,
+        type: GET_USERS,
         users: users
     });
 };
 
 export const addUser = (user) => {
+    console.log(user)
     return ({
-        type: types.ADD_USER,
-        user: user
+        type: ADD_USER,
+        user: {
+            fullName:user.fullName,
+            email:user.email
+        }
     });
 };
 
 export const editUser = (user) => {
     return ({
-        type: types.EDIT_USER,
+        type: EDIT_USER,
         user: user
     });
 };
 
-export const deleteUser = (id) => {
+export const deleteUser = (user) => {
+    console.log(user);
     return ({
-        type: types.DELETE_USER,
-        id: id
+        type: DELETE_USER,
+        id: user.id
     });
 };
 
 export const onChange = (payload) => {
     return {
-        type: types.ON_CHANGE,
+        type: ON_CHANGE,
         payload
     };
 }

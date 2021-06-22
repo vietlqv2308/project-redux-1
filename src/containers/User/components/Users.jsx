@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 class Users extends Component {
     render() {
         const users = this.props.users;
-
         const elementUser = users.map((user, index,) => {
             return (
                 <User
@@ -40,7 +39,7 @@ class Users extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.users,
+        users: state.user.users,
     }
 };
 

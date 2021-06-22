@@ -1,12 +1,10 @@
 import { combineReducers } from "redux";
-import isDisplayForm from './isDisplayForm';
-import isEditing from './isEditting';
-import users from './user';
+import userReducer from '../containers/User/reducers.js';
+import productReducer from '../containers/Product/store/reducers';
 
-const myReducer = combineReducers({
-    isDisplayForm,
-    users: users,
-    isEditing,
+const rootReducer = combineReducers({
+    user : userReducer,
+    product: productReducer,
 });
 
-export default myReducer;
+export default rootReducer;
