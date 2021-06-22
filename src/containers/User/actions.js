@@ -40,14 +40,27 @@ export const getUsers = (users) => {
     });
 };
 
-export const addUser = (user) => {
-    return ({
-        type: ADD_USER,
-        user: {
-            fullName:user.fullName,
-            email:user.email
-        }
-    });
+export const addUser = (user,status) => {
+    if(status === 'ADD'){
+        return ({
+            type: ADD_USER,
+            user: {
+                id: user.id,
+                fullName:user.fullName,
+                email:user.email
+            }
+        });
+    }
+    if(status === 'EDIT'){
+        return ({
+            type: ADD_USER,
+            user: {
+                id : user.id,
+                fullName:user.fullName,
+                email:user.email
+            }
+        });
+    }
 };
 
 export const editUser = (user) => {
@@ -86,12 +99,12 @@ export const deleteUserRequest = (id, dispatch) => {
 export const updateUserRequest = (user, dispatch) => {
     dispatch(editUser(user));
     myAxios.updateUserRequest(user).then((response) => {
-        dispatch(addUser(response));
+        dispatch(addUser(response,'EDIT'));
     });
 }
 
 export const createUserRequest = (user, dispatch) => {
     myAxios.createUserRequest(user).then((response) => {
-        dispatch(addUser(response));
+        dispatch(addUser(response,'ADD'));
     });
 }

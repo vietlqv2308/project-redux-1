@@ -17,26 +17,39 @@ const myReducer = (state = initialState, action) => {
         //handle DisplayForm
         case types.IS_TOGGLE_FORM:
             state.isDisplayForm = !state.isDisplayForm;
+            return {
+                ...state,
+                isEditing: {
+                    fullName: '',
+                    email: ''
+                }
+            };
+
+                case types.IS_OPEN_FORM:
+                state.isDisplayForm = true
             return { ...state };
 
-        case types.IS_OPEN_FORM:
-            state.isDisplayForm = true
+                case types.IS_CLOSE_FORM:
+                return {
+                    ...state,
+                    isDisplayForm: false,
+                    isEditing: {
+                        fullName: '',
+                        email: ''
+                    },
+                };
+
+                //handleUsers
+                case types.GET_USERS:
+                state.users = action.users
             return { ...state };
 
-        case types.IS_CLOSE_FORM:
-            state.isDisplayForm = false
-            return { ...state };
-
-        //handleUsers
-        case types.GET_USERS:
-            state.users = action.users
-            return { ...state };
-
-        case types.ADD_USER:
-            const newUsers = [...state.users];
-            if (!action.user.id) {
+                case types.ADD_USER:
+                const newUsers = [...state.users];
+                console.log(action.user)
+            if(!action.user.id) {
                 const newUser = {
-                    id:generateId(),
+                    id: generateId(),
                     fullName: action.user.fullName,
                     email: action.user.email
                 };
@@ -54,7 +67,7 @@ const myReducer = (state = initialState, action) => {
                 }
                 return {
                     ...state,
-                    users : newUsers
+                    users: newUsers
                 };
             }
 
