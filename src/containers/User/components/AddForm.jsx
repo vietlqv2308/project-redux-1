@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import * as actions from "../actions";
+import {
+    handleChangeForm,
+    createUserRequest,
+    updateUserRequest,
+    isCloseForm
+} from '../redux-toolkit'
 
 class AddForm extends Component {
 
@@ -80,7 +85,7 @@ class AddForm extends Component {
                                 type="submit"
                                 className="btn btn-danger"
                                 onClick={this.onCloseForm}>
-                                Exit
+                                Close
                             </button>
                         </div>
                     </form>
@@ -100,23 +105,21 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onCloseForm: () => {
-            dispatch(actions.isCloseForm());
+            dispatch(isCloseForm());
         },
 
         onChange: (data) => {
-            dispatch(actions.onChange(data));
+            dispatch(handleChangeForm(data));
         },
 
         onAddUser: (user) => {
             if (user.id) {
-                actions.updateUserRequest(user, dispatch);
-                actions.getUsersRequest(dispatch);
+                dispatch(updateUserRequest(user));
             } else {
-                actions.createUserRequest(user, dispatch);
-                actions.getUsersRequest(dispatch);
+                dispatch(createUserRequest(user));
             }
-            dispatch(actions.isCloseForm());
-        }
+            dispatch(isCloseForm());
+        },
     };
 }
 

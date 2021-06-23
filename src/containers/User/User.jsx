@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import Users from "./components/Users";
 import AddForm from "./components/AddForm";
 import { connect } from "react-redux";
-import * as actions from "./actions";
+import {
+    isToggleForm,
+    getUsersRequest
+} from "./redux-toolkit";
 
 class User extends Component {
 
@@ -16,7 +19,7 @@ class User extends Component {
 
     render() {
         const isDisplayForm = this.props.isDisplayForm;
-        const elementForm = isDisplayForm && <AddForm />
+        const elementForm = isDisplayForm && <AddForm />;
 
         return (
             <div className="container">
@@ -59,10 +62,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onToggleForm: () => {
-            dispatch(actions.isToggleForm());
+            dispatch(isToggleForm());
         },
+
         getUsersRequest: () => {
-            actions.getUsersRequest(dispatch);
+            dispatch(getUsersRequest());
         },
     };
 }

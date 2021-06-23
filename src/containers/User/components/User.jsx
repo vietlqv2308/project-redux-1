@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import * as actions from '../actions';
-
+import {
+    isOpenForm,
+    deleteUserRequest
+} from '../redux-toolkit';
 class User extends Component {
 
     onDeleteUser = () => {
@@ -49,14 +51,13 @@ class User extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         onDeleteUser: (id) => {
-            actions.deleteUserRequest(id, dispatch);
+            dispatch(deleteUserRequest(id));
         },
 
         onEditUser: (user) => {
-            dispatch(actions.editUser(user));
-            dispatch(actions.isOpenForm());
-        }
-    }
+            dispatch(isOpenForm(user));
+        },
+    };
 }
 
 export default connect(null, mapDispatchToProps)(User);

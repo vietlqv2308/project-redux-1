@@ -41,6 +41,6 @@ const mapStateToProps = (state) => {
     return {
         users: state.user.users,
     }
-};
+}
 
 export default connect(mapStateToProps)(Users);

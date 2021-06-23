@@ -10,14 +10,14 @@ export function deleteUserRequest(id) {
 
 export function updateUserRequest(user) {
     return myAxios.put('https://60c9f839772a760017204e50.mockapi.io/users/' + user.id, {
-            fullName: user.fullName,
-            email: user.email
-        })
+        fullName: user.fullName,
+        email: user.email
+    })
 }
 
 export function createUserRequest(user) {
     return myAxios
-        .post('https://60c9f839772a760017204e50.mockapi.io/users',{
+        .post('https://60c9f839772a760017204e50.mockapi.io/users', {
             fullName: user.fullName,
             email: user.email
         })

@@ -7,7 +7,7 @@ import Home from './containers/Home/Home';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 class App extends Component {
-    
+
     render() {
         return (
             <Router>
@@ -22,10 +22,10 @@ class App extends Component {
                         <Route path="/user">
                             <User />
                         </Route>
-
-                        <Route path="/product">
+                        {/* TODO */}
+                        {/* <Route path="/product">
                             <Product />
-                        </Route>
+                        </Route> */}
                     </Switch>
                 </div>
             </Router>
