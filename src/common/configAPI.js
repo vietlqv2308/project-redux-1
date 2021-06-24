@@ -1,12 +1,12 @@
-import axios from "axios";
+import axios from "axios"
 
-const myAxios = axios.create();
+const myAxios = axios.create()
 
 myAxios.interceptors.response.use(
-    (res) => res.data,
-    (error) => {
-        console.log(error);
-    }
-);
+  res => res.data,
+  error => {
+    return error
+  }
+)
 
-export default myAxios;
+export default myAxios

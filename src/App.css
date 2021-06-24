@@ -1,13 +1,12 @@
-
-.d-flex{
-    display: flex;
+.d-flex {
+  display: flex;
 }
-.justify-content-center{
-    justify-content: center;
+.justify-content-center {
+  justify-content: center;
 }
-.mr-5{
-    margin-right: 5px;
+.mr-5 {
+  margin-right: 5px;
 }
-.mt-15{
-    margin-top: 15px;
+.mt-15 {
+  margin-top: 15px;
 }
