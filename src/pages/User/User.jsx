@@ -51,25 +51,4 @@ const User = () => {
   )
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     isDisplayForm: state.user.isDisplayForm,
-//     users: state.user.users
-//   }
-// }
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     onToggleForm: () => {
-//       dispatch(isToggleForm())
-//     },
-
-//     getUsersRequest: () => {
-//       dispatch(getUsersRequest())
-//     }
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(User)
-
 export default User
